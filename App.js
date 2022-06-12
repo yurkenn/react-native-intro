@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, SafeAreaView, StyleSheet, Image, View, Button, TouchableOpacity } from "react-native"
 
 function MyCustomButton(props) {
   // props.title
   return (
-    <TouchableOpacity style={[styles.button, props.style]}>
+    <TouchableOpacity style={[styles.button, props.style]} onPress={props.onPress} >
       <Text style={styles.buttonText}>{props.title}</Text>
     </TouchableOpacity>
   )
 }
 
+
 function App() {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount(count + 1)
+
+  }
+  const handleDecrement = () => {
+    setCount(count - 1)
+
+  }
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <Image source={require('./assets/react.jpg')} style={styles.image} />
-        <Text style={styles.text}>Counter: 0</Text>
+        <Text style={styles.text}>Counter: {count}</Text>
         <Text style={styles.subtitle}>
           Click Buttons to change the counter
         </Text>
@@ -36,8 +47,8 @@ function App() {
         </View> */}
 
         <View style={styles.buttonContainer}>
-          <MyCustomButton title="Increment" />
-          <MyCustomButton title="Decrement" style={{ marginStart: 16, backgroundColor: 'pink' }} />
+          <MyCustomButton title="Increment +" onPress={handleIncrement} />
+          <MyCustomButton title="Decrement -" style={{ marginStart: 16, backgroundColor: 'pink' }} onPress={handleDecrement} />
         </View>
 
       </View>
